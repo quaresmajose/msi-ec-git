@@ -16,7 +16,13 @@ conflicts=('msi-ec-git')
 provides=('msi-ec')
 
 source=("git+https://github.com/BeardOverflow/msi-ec.git")
-sha256sums=('SKIP')
+source+=("0001-msi-ec-Add-Summit-E14Evo-new-firmware.patch")
+sha256sums=('SKIP'
+            '3911070036382069ef79f8bb556fe832443771c3539c4136aa50d0bde24e5fcd')
+
+prepare() {
+    git -C ${_gitname} am ${srcdir}/0001-msi-ec-Add-Summit-E14Evo-new-firmware.patch
+}
 
 package() {
     cd "${_gitname}"
