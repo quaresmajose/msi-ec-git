@@ -16,7 +16,13 @@ conflicts=('msi-ec-git')
 provides=('msi-ec')
 
 source=("git+https://github.com/BeardOverflow/msi-ec.git")
-sha256sums=('SKIP')
+source+=("0001-fix-kernel-6.11.patch")
+sha256sums=('SKIP'
+            'a419987c2d609da8ca4299cb36919e30a71ca76ba1ce39cd7bf7b107933deeea')
+
+prepare() {
+    git -C ${_gitname} am ${srcdir}/0001-fix-kernel-6.11.patch
+}
 
 package() {
     cd "${_gitname}"
